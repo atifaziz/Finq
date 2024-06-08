@@ -1,0 +1,45 @@
+﻿#nullable enable
+Finq.Arg
+Finq.Funq
+Finq.Funq.ArgOf<T>
+Finq.IArg
+static Finq.Arg.Byte(this Finq.IArg! _) -> System.Func<byte, byte>!
+static Finq.Arg.DateTime(this Finq.IArg! _) -> System.Func<System.DateTime, System.DateTime>!
+static Finq.Arg.DateTimeOffset(this Finq.IArg! _) -> System.Func<System.DateTimeOffset, System.DateTimeOffset>!
+static Finq.Arg.Double(this Finq.IArg! _) -> System.Func<double, double>!
+static Finq.Arg.Guid(this Finq.IArg! _) -> System.Func<System.Guid, System.Guid>!
+static Finq.Arg.Int16(this Finq.IArg! _) -> System.Func<short, short>!
+static Finq.Arg.Int32(this Finq.IArg! _) -> System.Func<int, int>!
+static Finq.Arg.Int64(this Finq.IArg! _) -> System.Func<long, long>!
+static Finq.Arg.Object(this Finq.IArg! _) -> System.Func<object!, object!>!
+static Finq.Arg.Single(this Finq.IArg! _) -> System.Func<float, float>!
+static Finq.Arg.String(this Finq.IArg! _) -> System.Func<string!, string!>!
+static Finq.Arg.TimeSpan(this Finq.IArg! _) -> System.Func<System.TimeSpan, System.TimeSpan>!
+static Finq.Arg.Uri(this Finq.IArg! _) -> System.Func<System.Uri!, System.Uri!>!
+static Finq.Funq.Apply<T>(this System.Func<System.ValueTuple, T>! func) -> System.Func<T>!
+static Finq.Funq.Apply<TArg, T>(this System.Func<TArg, T>! func, TArg arg) -> System.Func<T>!
+static Finq.Funq.ArgOf<T>.Return() -> System.Func<T, T>!
+static Finq.Funq.ArgOf<T>.Return<TResult>(TResult result) -> System.Func<T, TResult>!
+static Finq.Funq.AsObject<TArg, T>(this System.Func<TArg, T>! func) -> System.Func<TArg, object?>!
+static Finq.Funq.Cast<T>(this System.Func<object!, object!>! func) -> System.Func<object!, T>!
+static Finq.Funq.Default<TArg, T>(this System.Func<TArg, (bool, T)>! function, T value) -> System.Func<TArg, T>!
+static Finq.Funq.GetResult<TArg, T>(this System.Func<TArg, (bool, T)>! function) -> System.Func<TArg, T>!
+static Finq.Funq.Ignore<T>(this System.Func<T>! func) -> System.Action!
+static Finq.Funq.Invoke<T>(this System.Func<System.ValueTuple, (bool, T)>! function) -> (bool, T)
+static Finq.Funq.Invoke<T>(this System.Func<System.ValueTuple, (bool, T)>! function, T default) -> T
+static Finq.Funq.Invoke<T>(this System.Func<System.ValueTuple, T>! function) -> T
+static Finq.Funq.Invoke<TArg, T>(this System.Func<TArg, (bool, T)>! function, TArg arg) -> T
+static Finq.Funq.Invoke<TArg, T>(this System.Func<TArg, (bool, T)>! function, TArg arg, T default) -> T
+static Finq.Funq.Invoke<TArg1, TArg2, T>(this System.Func<(TArg1, TArg2), T>! function, TArg1 arg1, TArg2 arg2) -> T
+static Finq.Funq.Invoke<TArg1, TArg2, TArg3, T>(this System.Func<(TArg1, TArg2, TArg3), T>! function, TArg1 arg1, TArg2 arg2, TArg3 arg3) -> T
+static Finq.Funq.Match<TArg, T, TResult>(this System.Func<TArg, (bool, T)>! function, System.Func<T, TResult>! whenSome, System.Func<TResult>! whenNone) -> System.Func<TArg, TResult>!
+static Finq.Funq.Match<TArg, T, TResult>(this System.Func<TArg, (bool, T)>! function, System.Func<T, TResult>! whenSome, TResult none) -> System.Func<TArg, TResult>!
+static Finq.Funq.Return<T>(T value) -> System.Func<System.ValueTuple, T>!
+static Finq.Funq.Select<TArg, T, TResult>(this System.Func<TArg, (bool, T)>! func, System.Func<T, TResult>! selector) -> System.Func<TArg, (bool, TResult)>!
+static Finq.Funq.Select<TArg, T, TResult>(this System.Func<TArg, System.Threading.Tasks.Task<T>!>! func, System.Func<T, TResult>! selector) -> System.Func<TArg, System.Threading.Tasks.Task<TResult>!>!
+static Finq.Funq.Select<TArg, T, TResult>(this System.Func<TArg, T>! func, System.Func<T, TResult>! selector) -> System.Func<TArg, TResult>!
+static Finq.Funq.SelectMany<TArg, TFirst, TSecond, TResult>(this System.Func<TArg, TFirst>! first, System.Func<TFirst, System.Func<TArg, TSecond>!>! second, System.Func<TFirst, TSecond, TResult>! resultSelector) -> System.Func<TArg, TResult>!
+static Finq.Funq.TryInvoke<TArg, T>(this System.Func<TArg, (bool, T)>! function, TArg arg, out T? result) -> bool
+static Finq.Funq.Where<TArg, T>(this System.Func<TArg, T>! func, System.Func<T, bool>! predicate) -> System.Func<TArg, (bool, T)>!
+static Finq.Funq.Zip<TArg, TFirst, TSecond>(this System.Func<TArg, TFirst>! first, System.Func<TArg, TSecond>! second) -> System.Func<TArg, (TFirst First, TSecond Second)>!
+static readonly Finq.Funq.Arg -> Finq.IArg!

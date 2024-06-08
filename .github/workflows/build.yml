@@ -1,0 +1,76 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+    - '*.md'
+    - '*.txt'
+    branches:
+    - master
+  pull_request:
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-22.04]
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install ECLint
+      run: npm install -g eclint
+
+    - name: Delete EditorConfig file
+      run: git rm .editorconfig
+
+    - name: Check Final New-Line
+      run: eclint check -n "**/*.{cs,tt,cmd,sh,md,txt,yml}"
+
+    - name: Check Trailing Whitespace
+      run: eclint check -w "**/*.{cs,tt,cmd,sh,md,txt,yml,json,sln,csproj,shfbproj}"
+
+    - name: Restore Checkout
+      run: git reset --hard
+
+    - name: Setup .NET SDK per "global.json"
+      uses: actions/setup-dotnet@v3
+      with:
+        global-json-file: global.json
+
+    - name: Setup .NET SDK 6.0
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: .NET Information
+      run: dotnet --info
+
+    - name: Build & Pack
+      if: runner.os != 'Windows'
+      run: ./pack.sh
+
+    - name: Test
+      if: runner.os != 'Windows'
+      run: ./test.sh
+
+    - name: Publish Coverage to Codecov
+      uses: codecov/codecov-action@v3
