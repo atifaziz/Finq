@@ -11,7 +11,9 @@ param(
     [Parameter(ParameterSetName = 'Pack', Mandatory = $true)]
     [switch]$Pack,
     [Parameter(ParameterSetName = 'Pack')]
-    [string]$VersionSuffix
+    [string]$VersionSuffix,
+    [Parameter(ParameterSetName = 'Pack')]
+    [switch]$CI
 )
 
 $ErrorActionPreference = 'Stop'
@@ -72,6 +74,10 @@ function Test
 function Pack
 {
     Invoke-Build 'Release'
+
+    if (!$versionSuffix -and ($ci -or $env:CI -eq 'true')) {
+        $versionSuffix = ([datetimeoffset](git show -q --pretty=%cI)).ToUniversalTime().ToString('yyyyMMdd''t''HHmm')
+    }
 
     [string[]]$argv = @()
     if ($versionSuffix)
