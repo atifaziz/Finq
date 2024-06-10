@@ -149,6 +149,10 @@ function Release
         throw "Listing GitHub workflow runs failed (exit code = $LASTEXITCODE)."
     }
 
+    if (!$run) {
+        throw "There is no complete run for commit: $commitId"
+    }
+
     if ($run.conclusion -ne 'success') {
         throw "Latest run (#$($run.number)) for commit $commitId did not succeed."
     }
