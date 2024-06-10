@@ -75,8 +75,10 @@ function Pack
 {
     Invoke-Build 'Release'
 
-    if (!$versionSuffix -and ($ci -or $env:CI -eq 'true')) {
-        $versionSuffix = ([datetimeoffset](git show -q --pretty=%cI)).ToUniversalTime().ToString('yyyyMMdd''t''HHmm')
+    if (!$versionSuffix -and ($ci -or $env:CI -eq 'true'))
+    {
+        [datetimeoffset]$commitTime = git show -q --pretty=%cI
+        $versionSuffix = "ci-$($commitTime.ToUniversalTime().ToString('yyyyMMdd''t''HHmm'))"
     }
 
     [string[]]$argv = @()
