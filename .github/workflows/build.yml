@@ -74,3 +74,9 @@ jobs:
 
     - name: Publish Coverage to Codecov
       uses: codecov/codecov-action@v3
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: nuget
+        if-no-files-found: error
+        path: dist/*.nupkg
