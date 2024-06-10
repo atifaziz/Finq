@@ -13,7 +13,9 @@ param(
     [Parameter(ParameterSetName = 'Pack')]
     [string]$VersionSuffix,
     [Parameter(ParameterSetName = 'Pack')]
-    [switch]$CI
+    [switch]$CI,
+    [Parameter(ParameterSetName = 'Pack')]
+    [switch]$NoValidation
 )
 
 $ErrorActionPreference = 'Stop'
@@ -92,6 +94,30 @@ function Pack
 
     if (!$?) {
         throw "Packing failed (exit code = $LASTEXITCODE)."
+    }
+
+    if (-not $noValidation)
+    {
+        $info = `
+            dotnet msbuild src -getProperty:VersionPrefix -getProperty:PackageId |
+            ConvertFrom-Json
+
+        if (!$?) {
+            throw "Build query failed (exit code = $LASTEXITCODE)."
+        }
+
+        $versionPrefix = $info.Properties.VersionPrefix
+        $packageId = $info.Properties.PackageId
+        $packageVersion = if ($versionSuffix) { "$versionPrefix-$versionSuffix" } else { $versionPrefix }
+        $nupkgPath = Join-Path dist "$packageId.$packageVersion.nupkg"
+
+        dotnet meziantou.validate-nuget-package $nupkgPath `
+            --excluded-rules XmlDocumentationMustBePresent `
+            --excluded-rules IconMustBeSet
+
+        if (!$?) {
+            throw "Package validation failed (exit code = $LASTEXITCODE)."
+        }
     }
 }
 
