@@ -129,4 +129,21 @@ if (-not $noToolRestore)
     }
 }
 
-& $PSCmdlet.ParameterSetName
+Push-Location $PSScriptRoot
+
+try
+{
+    if (-not $noToolRestore)
+    {
+        dotnet tool restore
+        if (!$?) {
+            throw "Restoring tools failed (exit code = $LASTEXITCODE)."
+        }
+    }
+
+    & $PSCmdlet.ParameterSetName
+}
+finally
+{
+    Pop-Location
+}
