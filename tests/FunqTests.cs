@@ -1,3 +1,7 @@
+// Copyright (c) 2024 Atif Aziz.
+// Licensed under the Apache License, Version 2.0 (the "License").
+// See "COPYING.txt" file in the project root for full license information.
+
 namespace Finq.Tests;
 
 public class FunqTests
