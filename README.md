@@ -112,7 +112,7 @@ functor_ and more. For more on this, see the “[The Reader functor]” blog pos
 by [Mark Seemann] (_aka_ [@ploeh]), and specifically the section “[Raw
 functions]”.
 
-Finq's `Funq.Arg` ship with a number of common argument types, such as `Int32`,
+Finq's `Funq.Arg` ships with a number of common argument types, such as `Int32`,
 `String`, `Double`, `Boolean`, etc., but you can add your own to the mix by
 writing an extension method for `IArg`.
 
