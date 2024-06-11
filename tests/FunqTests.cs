@@ -123,6 +123,22 @@ public class FunqTests
         Assert.Equal(pass ? expected : 0, actual);
     }
 
+    [Theory]
+    [InlineData(-1, -42)]
+    [InlineData(-1, 0)]
+    [InlineData(42, 42)]
+    public void Invoke_Fallible_With_Default(int expected, int input)
+    {
+        var positive =
+            from x in Funq.Arg.Int32()
+            where x > 0
+            select x;
+
+        var result = positive.Invoke(input, -1);
+
+        Assert.Equal(expected, result);
+    }
+
     [Fact]
     public void Invoke2()
     {
