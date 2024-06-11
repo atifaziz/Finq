@@ -159,7 +159,7 @@ on this pattern.
 [The Reader functor]: https://blog.ploeh.dk/2021/08/30/the-reader-functor/
 [Raw functions]: https://blog.ploeh.dk/2021/08/30/the-reader-functor/#ad9b3abef16c4ec8a70a1263c17eecd6
 [Mark Seemann]: https://blog.ploeh.dk/
-[@ploeh]: [https://github.com/ploeh]
+[@ploeh]: https://github.com/ploeh
 [CS0411]: https://learn.microsoft.com/en-us/dotnet/c#/misc/cs0411
 [Parameter Object]: https://wiki.c2.com/?ParameterObject
 [Optuple]: https://github.com/atifaziz/Optuple
