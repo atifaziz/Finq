@@ -113,8 +113,8 @@ by [Mark Seemann] (_aka_ [@ploeh]), and specifically the section “[Raw
 functions]”.
 
 Finq's `Funq.Arg` ships with a number of common argument types, such as `Int32`,
-`String`, `Double`, `Boolean`, etc., but you can add your own to the mix by
-writing an extension method for `IArg`.
+`String`, `Double`, `Boolean`, etc. You can add your own to the mix by writing
+an extension method for `IArg`.
 
 For ad-hoc specification of the argument type, use `Funq.ArgOf<T>.Return()`:
 
